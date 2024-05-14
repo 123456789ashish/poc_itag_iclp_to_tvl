@@ -1,0 +1,62 @@
+<TagValidationList>
+    <TVLHeader>
+        <SubmissionType>STVL</SubmissionType>
+        <SubmissionDateTime>2024-03-14T05:59:44Z</SubmissionDateTime>
+        <SSIOPHubID>9002</SSIOPHubID>
+        <HomeAgencyID>0041</HomeAgencyID>
+        <BulkIndicator>B</BulkIndicator>
+        <BulkIdentifier>8930</BulkIdentifier>
+        <RecordCount>606330</RecordCount>
+    </TVLHeader>
+    <TVLDetail>
+        <TVLTagDetails>
+            <HomeAgencyID>0041</HomeAgencyID>
+            <TagAgencyID>0034</TagAgencyID>
+            <TagSerialNumber>88811410</TagSerialNumber>
+            <TagStatus>V</TagStatus>
+            <TagClass>2</TagClass>
+            <TVLPlateDetail>
+                <TVLPlateDetails>
+                    <PlateCountry>US</PlateCountry>
+                    <PlateState>TX</PlateState>
+                    <PlateNumber>HHH7458</PlateNumber>
+                    <PlateEffectiveFrom>2020-10-18T18:36:41Z</PlateEffectiveFrom>
+                </TVLPlateDetails>
+            </TVLPlateDetail>
+            <TVLAccountDetails>
+                <AccountNumber>3000003927</AccountNumber>
+                <FleetIndicator>N</FleetIndicator>
+            </TVLAccountDetails>
+        </TVLTagDetails>
+
+        <TVLTagDetails>
+            <HomeAgencyID>0041</HomeAgencyID>
+            <TagAgencyID>0034</TagAgencyID>
+            <TagSerialNumber>88811410</TagSerialNumber>
+            <TagStatus>V</TagStatus>
+            <TagClass>2</TagClass>
+
+            <TVLPlateDetail>
+                <TVLPlateDetails>
+                    <PlateCountry>US</PlateCountry>
+                    <PlateState>TX</PlateState>
+                    <PlateNumber>HHH7458</PlateNumber>
+                    <PlateEffectiveFrom>2020-10-18T18:36:41Z</PlateEffectiveFrom>
+                </TVLPlateDetails>
+                <TVLPlateDetails>
+                    <PlateCountry>US</PlateCountry>
+                    <PlateState>TX</PlateState>
+                    <PlateNumber>HHH7458</PlateNumber>
+                    <PlateEffectiveFrom>2020-10-18T18:36:41Z</PlateEffectiveFrom>
+                </TVLPlateDetails>
+            </TVLPlateDetail>
+
+            <TVLAccountDetails>
+                <AccountNumber>3000003927</AccountNumber>
+                <FleetIndicator>N</FleetIndicator>
+            </TVLAccountDetails>
+        </TVLTagDetails>
+
+
+    </TVLDetail>
+</TagValidationList>
