@@ -7,11 +7,12 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
+@Component
+@RequiredArgsConstructor
 public class ICLPWriter  {
-
-    @Autowired
-    private ICLPRepository repository;
+    private final ICLPRepository repository;
 
 
     public RepositoryItemWriter<ICLPEntity> iclpWriter() {

@@ -13,7 +13,9 @@ public class CustomPhysicalNamingStrategy extends PhysicalNamingStrategyStandard
 
     @Override
     public Identifier toPhysicalTableName(Identifier logicalName, JdbcEnvironment context) {
-        return Identifier.toIdentifier(logicalName.getText().replace("ICLPEntity","ICLPENTITY_10052024"));
+        return Identifier.toIdentifier(logicalName.getText()
+                .replace("ICLPEntity","ICLPENTITY_10052024")
+                .replace("ITAGEntity","ITAGENTITY_10052024"));
     }
 
 

@@ -25,6 +25,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 @RequiredArgsConstructor
 public class ITAGBatchConfig {
 
+    @Autowired
+    private ITAGWriter iTAGWriter;
 
     @Bean
     public ItemReader<ITAGFileData> itagReader() {
@@ -38,8 +40,9 @@ public class ITAGBatchConfig {
 
     @Bean
     public RepositoryItemWriter<ITAGEntity> itagWriter() {
-        return new ITAGWriter().itagWriter();
+        return  iTAGWriter.itagWriter();
     }
+
 
     @Bean
     public TaskExecutor itagTaskExecutor() {

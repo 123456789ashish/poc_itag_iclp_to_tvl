@@ -1,42 +1,44 @@
 package com.batch.reader;
 
 import com.batch.mapper.TVLRowMapper;
-import com.batch.model.TVLTableData;
-import org.springframework.batch.item.database.JdbcPagingItemReader;
-import org.springframework.batch.item.database.support.SqlServerPagingQueryProvider;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.batch.item.database.*;
+import org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TVLTableReader {
 
-    @Autowired
-    private DataSource dataSource;
-
-    @Autowired
-    private TVLRowMapper tvlRowMapper;
 
 
-    public JdbcPagingItemReader<TVLTableData> customerPagingItemReader(){
-        // reading database records using JDBC in a paging fashion
-        JdbcPagingItemReader<TVLTableData> reader = new JdbcPagingItemReader<>();
-        reader.setDataSource(this.dataSource);
-        reader.setFetchSize(10000);
-        reader.setRowMapper(tvlRowMapper);
+    public JdbcPagingItemReader<String> jdbcPagingItemReader(DataSource dataSource) throws Exception {
 
-        // Sort Keys
-      /*  Map<String, Order> sortKeys = new HashMap<>();
-        sortKeys.put("id", Order.ASCENDING);*/
-
-        // MySQL implementation of a PagingQueryProvider using database specific features.
-        SqlServerPagingQueryProvider queryProvider = new SqlServerPagingQueryProvider();
-        queryProvider.setSelectClause("TAG_AGENCY_ID, TAG_SERIAL_NUMBER, TAG_STATUS, TAG_ACCT_INFO , LIC_STATE,  LIC_NUMBER, LIC_TYPE ");
-        queryProvider.setFromClause("from TVLDETAIL");
-        //queryProvider.setSortKeys(sortKeys);
-
-        reader.setQueryProvider(queryProvider);
-
+        // reading ITAG keys records using JDBC in a paging fashion
+        JdbcPagingItemReader<String> reader = new JdbcPagingItemReader<String>();
+        reader.setDataSource(dataSource);
+        //reader.setFetchSize(50);
+        reader.setPageSize(50);
+        reader.setSaveState(true);
+        reader.setQueryProvider(createQuery(dataSource));
+        reader.setRowMapper(new TVLRowMapper());
         return reader;
+
+
+
+    }
+
+    private PagingQueryProvider createQuery(DataSource dataSource) throws Exception {
+        final Map<String, Order> sortKeys = new HashMap<>();
+        sortKeys.put("TAG_SERIAL_NUMBER", Order.ASCENDING);
+
+        final SqlPagingQueryProviderFactoryBean queryProvider = new SqlPagingQueryProviderFactoryBean();
+        queryProvider.setDataSource(dataSource);
+        queryProvider.setSelectClause(" TAG_SERIAL_NUMBER ");
+        queryProvider.setFromClause(" ITAGENTITY_10052024 ");
+        queryProvider.setWhereClause(" TAG_SERIAL_NUMBER like '09900%' ");
+        queryProvider.setSortKeys(sortKeys);
+        return queryProvider.getObject();
     }
 
 }

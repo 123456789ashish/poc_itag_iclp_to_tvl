@@ -1,55 +1,57 @@
 package com.batch.model.TVLFile;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.util.HashMap;
 import java.util.Map;
+
+@XmlRootElement(name="TVLTagDetail")
 public class TVLTagDetail {
+
     private String tagAgencyID;
-    private TVLAccountDetails tVLAccountDetails;
-    private String homeAgencyID;
+    private String tagSerialNumber;
     private String tagStatus;
-    private TVLPlateDetail tVLPlateDetail;
-    private Integer tagClass;
-    private Integer tagSerialNumber;
+    private String tagAccountInfo;
+
+    private TVLPlateDetail tvlPlateDetail;
+
+    public String getTagAccountInfo() {
+        return tagAccountInfo;
+    }
+
+    public void setTagAccountInfo(String tagAccountInfo) {
+        this.tagAccountInfo = tagAccountInfo;
+    }
+
+    public TVLPlateDetail gettVLPlateDetail() {
+        return tvlPlateDetail;
+    }
+
+    public void settVLPlateDetail(TVLPlateDetail tVLPlateDetail) {
+        this.tvlPlateDetail = tVLPlateDetail;
+    }
+
     public String getTagAgencyID() {
         return tagAgencyID;
     }
+
     public void setTagAgencyID(String tagAgencyID) {
         this.tagAgencyID = tagAgencyID;
     }
-    public TVLAccountDetails getTVLAccountDetails() {
-        return tVLAccountDetails;
-    }
-    public void setTVLAccountDetails(TVLAccountDetails tVLAccountDetails) {
-        this.tVLAccountDetails = tVLAccountDetails;
-    }
-    public String getHomeAgencyID() {
-        return homeAgencyID;
-    }
-    public void setHomeAgencyID(String homeAgencyID) {
-        this.homeAgencyID = homeAgencyID;
-    }
+
     public String getTagStatus() {
         return tagStatus;
     }
+
     public void setTagStatus(String tagStatus) {
         this.tagStatus = tagStatus;
     }
-    public TVLPlateDetail getTVLPlateDetail() {
-        return tVLPlateDetail;
-    }
-    public void setTVLPlateDetail(TVLPlateDetail tVLPlateDetail) {
-        this.tVLPlateDetail = tVLPlateDetail;
-    }
-    public Integer getTagClass() {
-        return tagClass;
-    }
-    public void setTagClass(Integer tagClass) {
-        this.tagClass = tagClass;
-    }
-    public Integer getTagSerialNumber() {
+
+    public String getTagSerialNumber() {
         return tagSerialNumber;
     }
-    public void setTagSerialNumber(Integer tagSerialNumber) {
+
+    public void setTagSerialNumber(String tagSerialNumber) {
         this.tagSerialNumber = tagSerialNumber;
     }
 }

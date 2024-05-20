@@ -29,6 +29,10 @@ public class JobsController {
     @Qualifier("iclpRunJob")
     private Job iclpFileIngestionJob;
 
+    @Autowired
+    @Qualifier("tvlRunJob")
+    private Job tvlFileCreationJob;
+
     @GetMapping("/triggerITAG")
     public @ResponseBody String importITAGFileToDBJob() {
         JobParameters jobParameters = new JobParametersBuilder()
@@ -54,6 +58,25 @@ public class JobsController {
                 .toJobParameters();
         try {
             jobLauncher.run(iclpFileIngestionJob, jobParameters);
+        } catch (JobExecutionAlreadyRunningException
+                 | JobRestartException
+                 | JobInstanceAlreadyCompleteException
+                 | JobParametersInvalidException e) {
+            e.printStackTrace();
+        }
+
+        return "job successfull";
+    }
+
+
+
+    @GetMapping("/triggerTVL")
+    public @ResponseBody String importTVLFileJob() {
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addLong("startAt", System.currentTimeMillis())
+                .toJobParameters();
+        try {
+            jobLauncher.run(tvlFileCreationJob, jobParameters);
         } catch (JobExecutionAlreadyRunningException
                  | JobRestartException
                  | JobInstanceAlreadyCompleteException

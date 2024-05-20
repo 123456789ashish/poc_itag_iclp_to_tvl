@@ -14,7 +14,6 @@ public class ICLPEntity {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Integer RECORD_ID;
     private String LIC_STATE;
     private String LIC_NUMBER;

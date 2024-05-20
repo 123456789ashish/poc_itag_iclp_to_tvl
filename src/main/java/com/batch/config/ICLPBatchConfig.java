@@ -26,9 +26,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 @RequiredArgsConstructor
 public class ICLPBatchConfig {
 
-    @Value("${ICLPENTITY}")
-    public static String ICLPENTITY;
-
+    @Autowired
+    private ICLPWriter iCLPWriter;
 
     @Bean
     public ItemReader<ICLPFileData> iclpReader() {
@@ -42,7 +41,7 @@ public class ICLPBatchConfig {
 
     @Bean
     public RepositoryItemWriter<ICLPEntity> iclpWriter() {
-        return new ICLPWriter().iclpWriter();
+        return iCLPWriter.iclpWriter();
     }
 
     @Bean

@@ -1,23 +1,31 @@
 package com.batch.partitioner;
 
 
-import com.sun.xml.txw2.output.IndentingXMLStreamWriter;
-
-import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.TransformerConfigurationException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.util.Date;
 
 public class Sample {
 
 
     public static void main(String[] args) throws IOException, XMLStreamException, TransformerConfigurationException {
 
+        /*
+        JAXBContext jaxbContext = JAXBContext.newInstance(TVLEntity.class);
+        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
+// output pretty printed
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+
+        StringWriter sw = new StringWriter();
+        jaxbMarshaller.marshal(customer, sw);
+        String xmlString = sw.toString();
+
+*/
+
+
+        /*
         Writer fileWriter = new FileWriter("C:\\Users\\ashis\\data\\ofc_docs\\BRISKWIN\\project_2024\\workspace\\ITAG_ICLP_TO_BTVL\\src\\main\\resources\\output\\test_7.xml");
 
         // Getting the XMLOutputFactory instance
@@ -59,6 +67,8 @@ public class Sample {
 
         xmlStreamWriter.flush();
         xmlStreamWriter.close();
+
+         */
 
 
     }
