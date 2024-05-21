@@ -35,7 +35,7 @@ public class TVLBatchConfig {
     private TVLFileWriter tvlFileWriter;
 
     @Bean
-    public JdbcPagingItemReader<String> tvlTableDataItemReader() throws Exception {
+    public ItemReader<String> tvlTableDataItemReader() throws Exception {
         return new TVLTableReader().jdbcPagingItemReader(dataSource );
     }
 
@@ -61,6 +61,7 @@ public class TVLBatchConfig {
 
 
         SimpleAsyncTaskExecutor asyncTaskExecutor = new SimpleAsyncTaskExecutor();
+        asyncTaskExecutor.setConcurrencyLimit(5);
         return asyncTaskExecutor;
     }
 

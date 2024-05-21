@@ -17,7 +17,7 @@ public class TVLTableReader {
         // reading ITAG keys records using JDBC in a paging fashion
         JdbcPagingItemReader<String> reader = new JdbcPagingItemReader<String>();
         reader.setDataSource(dataSource);
-        //reader.setFetchSize(50);
+        reader.setFetchSize(50);
         reader.setPageSize(50);
         reader.setSaveState(true);
         reader.setQueryProvider(createQuery(dataSource));

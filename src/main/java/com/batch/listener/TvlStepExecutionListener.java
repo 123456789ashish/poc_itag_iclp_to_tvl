@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.xml.stream.XMLStreamException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 
 @Component
 public class TvlStepExecutionListener implements StepExecutionListener {
@@ -30,39 +27,39 @@ public class TvlStepExecutionListener implements StepExecutionListener {
     public void beforeStep(StepExecution stepExecution) {
 
         try {
-        Writer fileWriter =  new FileWriter("C:\\Users\\ashis\\data\\ofc_docs\\BRISKWIN\\project_2024\\workspace\\generated_files\\MINI_MT_50C.xml");
+            RandomAccessFile raf = new RandomAccessFile("C:\\Users\\ashis\\data\\ofc_docs\\BRISKWIN\\project_2024\\workspace\\generated_files\\MINI_5T_50C.xml","rw");
+            FileWriter fileWriter = new FileWriter(raf.getFD());
 
-        XMLOutputFactory2 xmlOutputFactory = (XMLOutputFactory2) XMLOutputFactory2.newFactory();
-        //xmlOutputFactory.setProperty("escapeCharacters", false);
+            XMLOutputFactory2 xmlOutputFactory = (XMLOutputFactory2) XMLOutputFactory2.newFactory();
+            //xmlOutputFactory.setProperty("escapeCharacters", false);
 
-        XMLStreamWriter2 xmlStreamWriter = (XMLStreamWriter2) xmlOutputFactory.createXMLStreamWriter(fileWriter);
+            XMLStreamWriter2 xmlStreamWriter = (XMLStreamWriter2) xmlOutputFactory.createXMLStreamWriter(fileWriter);
 
-        xmlStreamWriter.writeStartDocument("UTF-8", "1.0");
+            xmlStreamWriter.writeStartDocument("UTF-8", "1.0");
 
-        xmlStreamWriter.writeRaw("\n");
-        xmlStreamWriter.writeStartElement("TagValidationList");
-        xmlStreamWriter.writeRaw("\n");
+            xmlStreamWriter.writeRaw("\n");
+            xmlStreamWriter.writeStartElement("TagValidationList");
+            xmlStreamWriter.writeRaw("\n");
 
-        // TODO - add header details here
+            // TODO - add header details here
 
-        // setting writer bean
-        tvlXmlGenerator.setXmlWriter(xmlStreamWriter);
+            // setting writer bean
+            tvlXmlGenerator.setXmlWriter(xmlStreamWriter);
+
+            // setting raf and fileWriter
+            tvlXmlGenerator.setRaf(raf);
+            tvlXmlGenerator.setFileWriter(fileWriter);
 
 
-        // setting marshler bean
-        JAXBContext jaxbContext = JAXBContext.newInstance(TVLTagDetail.class);
-        Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
-        // output pretty printed
-        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        jaxbMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+            // setting jaxb context in bean
+            JAXBContext jaxbContext = JAXBContext.newInstance(TVLTagDetail.class);
 
-        tvlXmlGenerator.setJaxbContext(jaxbContext);
+            tvlXmlGenerator.setJaxbContext(jaxbContext);
 
-        // setting writer
-        StringWriter sw = new StringWriter();
-        tvlXmlGenerator.setSw(sw);
-
+            // setting writer
+            StringWriter sw = new StringWriter();
+            tvlXmlGenerator.setSw(sw);
 
 
         } catch (IOException e) {
@@ -91,7 +88,27 @@ public class TvlStepExecutionListener implements StepExecutionListener {
             xmlStreamWriter.flush();
             xmlStreamWriter.close();
 
+            //closing filewriter and raf
+            RandomAccessFile raf=tvlXmlGenerator.getRaf( );
+            FileWriter fileWriter=tvlXmlGenerator.getFileWriter();
+
+            fileWriter.close();
+            raf.close();
+
+
+            System.out.println(stepExecution.getReadCount());
+            System.out.println(stepExecution.getWriteCount());
+            System.out.println(stepExecution.getSkipCount());
+            System.out.println(stepExecution.getFilterCount());
+            System.out.println(stepExecution.getRollbackCount());
+            System.out.println(stepExecution.getReadSkipCount());
+            System.out.println(stepExecution.getCommitCount());
+            System.out.println(stepExecution.getWriteSkipCount());
+
+
         } catch (XMLStreamException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
